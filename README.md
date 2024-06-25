@@ -13,9 +13,9 @@ pip install requirements.txt
 python3 uvicorn main:app --reload
 ```
 <p>На домашней странице кликнуть на 
-<i>Посмотреть список героев<i/>
-Далее открывается список ссылок на героев Dota2 с ссылкой на героев, которые хороши против выбранного.<p/>
+<i>Посмотреть список героев</i>
+Далее открывается список ссылок на героев Dota2 с ссылкой на героев, которые хороши против выбранного.</p>
 <p>Кликнув на ссылку с названием героя, на новой странице отображается его статистика по порядку<p/>
-<h4>Lane, Presence, Win Rate, KDA Ratio, GPM, XPM<h4/>
+<h4>Lane, Presence, Win Rate, KDA Ratio, GPM, XPM</h4>
 Кликнув на ссылку контрпика:
-<h4>Hero, Disadvantage, Win Rate, Matches<h4/>
+<h4>Hero, Disadvantage, Win Rate, Matches</h4>
