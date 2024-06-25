@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}
+  {{ hero_name }}
+{% endblock %}
+{% block content %}
+  <h1 class="pb-2 mb-0">Информация о герое: {{ hero_name }}</h1>  
+  <div class="row mt-3">
+    <div class="col-12 col-md-6">
+      <h2>Контрпики:</h2>
+      <p>{% for statistic in statistics %}</p>
+        {%for i in statistic%}
+          {% for r in i%}
+          <tr>
+            <table><th>{{r}}</th><table/>
+          <tr/>
+          {% endfor %}
+        {% endfor %}
+        {% endfor %}     
+    </div> 
+    <div class="col-12 col-md-6 mb-3">    
+    </div>
+  </div>     
+{% endblock %}
