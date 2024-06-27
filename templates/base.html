@@ -3,10 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>{{ hero_name }}</title>
+  {% block title %} {% endblock %}
 </head>
 
 <body>
+  {% include "header.html" %}
   {% block content%} {% endblock content%}
 </body>
 

@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
-from scrapper import dotaBuffScrapping, heroes_links, counterBuffScrapper
+from scrapper import dotaBuffScrapping, heroes_links, \
+                    counterBuffScrapper, titles, counterpicks
 from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
@@ -24,6 +25,9 @@ def get_hero_info(request: Request, item_id: str):
     return templates.TemplateResponse("info_page/info.html",
                                       {"request": request,
                                        "hero_name": item_id,
+                                       "titles": titles,
+                                       "length": len(dotaBuffScrapping
+                                                     (item_id)[0]),
                                        "statistics":
                                        dotaBuffScrapping(item_id)})
 
@@ -33,5 +37,8 @@ def get_hero_counters(request: Request, item_id: str):
     return templates.TemplateResponse("counter_page/counter.html",
                                       {"request": request,
                                        "hero_name": item_id,
+                                       "counterpicks": counterpicks,
+                                       "length": len(counterBuffScrapper
+                                                     (item_id)[0]),
                                        "statistics":
                                        counterBuffScrapper(item_id)})
