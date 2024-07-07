@@ -1,7 +1,8 @@
 from fastapi import FastAPI, Request
-from scrapper import dotaBuffScrapping, heroes_links, \
+from scrapper import dotaBuffScrapping, heroes_list, \
                     counterBuffScrapper, titles, counterpicks
 from fastapi.templating import Jinja2Templates
+
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -17,7 +18,7 @@ def get_home(request: Request):
 def get_hero_links(request: Request):
     return templates.TemplateResponse("heroes_page/heroes.html",
                                       {"request": request,
-                                       "heroes": heroes_links()})
+                                       "heroes": heroes_list()})
 
 
 @app.get("/info/{item_id}")

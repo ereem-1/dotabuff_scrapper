@@ -22,11 +22,16 @@ bs_site = Soup(response_site.text, 'html.parser')
 bs_lanes = Soup(response_lanes.text, 'html.parser')
 
 '''Функция групировки/разбиения списка на одинаковое количество списков'''
+
+
 def grouper(iterable, n, fillvalue=None):
     args = [iter(iterable)] * n
     return zip_longest(*args, fillvalue=fillvalue)
 
+
 '''Функция, которая при выполнении получает список героев'''
+
+
 def heroes_list() -> list:
     temp = bs_site.find_all('div', 'tw-flex tw-flex-col tw-gap-0')
     heroes = []
@@ -37,7 +42,10 @@ def heroes_list() -> list:
         heroes[i] = heroes[i].lower().replace(' ', '-')
     return heroes
 
+
 '''Функция, которая получает список линий'''
+
+
 def lanes_list() -> list:
     mid_lane = bs_lanes.find('div', class_='filter')\
                     .find('div', class_='nav').find_next('nav')\
@@ -52,7 +60,10 @@ def lanes_list() -> list:
         lanes.append(i.text)
     return lanes
 
+
 '''Функция, которая на выходе возвращает статистику героя на линиях'''
+
+
 def dotaBuffScrapping(item_id: str) -> list:
     response_hero = requests.get(f'{url}/{item_id}', headers=headers)
     bs_hero = Soup(response_hero.text, 'html.parser')
@@ -74,15 +85,19 @@ def dotaBuffScrapping(item_id: str) -> list:
 
 ''''Функция, котоорая создает словарь,
 где ключ это герой, а значение - ссылка на него'''
-def heroes_links() -> dict:
-    dictionary = {}
-    for i in range(len(heroes_list())):
-        dictionary[heroes_list()[i]] = f'127.0.0.1:8000/info/\
-        {heroes_list()[i]}'
-    return dictionary
+
+
+# def heroes_links() -> dict:
+#     dictionary = {}
+#     for i in range(len(heroes_list())):
+#         dictionary[heroes_list()[i]] = f'127.0.0.1:8000/info/\
+#         {heroes_list()[i]}'
+#     return dictionary
 
 
 '''Функция, которая возвращает статистику контрпиков героя'''
+
+
 def counterBuffScrapper(item_id: str) -> list:
     c = []
     response_counter = requests.get(f'{url}/{item_id}', headers=headers)
@@ -97,7 +112,7 @@ def counterBuffScrapper(item_id: str) -> list:
     for nextSibling in nextSiblings:
         for next in nextSibling:
             c.append(next.text)
-    for i in c: # Удаление пробелов из списка контрпиков
+    for i in c:  # Удаление пробелов из списка контрпиков
         if i == '':
             c.remove(i)
     counter_statistic = list(grouper(c, SPLITTER_COUNTER, fillvalue=None))
